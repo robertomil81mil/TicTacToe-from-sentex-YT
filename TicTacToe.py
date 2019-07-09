@@ -94,18 +94,3 @@ while play:
 			else:
 				print("Thanks for play, bye")
 				play = False
-
-
-
-
-
-
-
-
-#game = game_board(game, just_display=True)
-#game = game_board(game_board, player=1, row=2, column=1)
-
-
-
-			
-
