@@ -205,7 +205,7 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
                     if is_uci_ponder and not ( ponder_move is None ):
                         ponder_board = board.copy()
                         ponder_board.push(best_move)
-                        ponder_board.push(ponder_move)
+
                         ponder_uci = ponder_move.uci()                            
                         ponder_thread = threading.Thread(target = ponder_thread_func, args = (game, engine, ponder_board, upd["wtime"], upd["btime"], upd["winc"], upd["binc"]))
                         ponder_thread.start()
