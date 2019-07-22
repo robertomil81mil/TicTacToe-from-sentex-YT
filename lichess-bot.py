@@ -267,18 +267,28 @@ def play_first_book_move(game, engine, board, li, config):
 
 def get_book_move(board, config):
     if board.uci_variant == "chess":
-        move = None
-        try:
-            result = li.api_query("http://www.chessdb.cn/cdb.php?action=query&board=" + board.fen())
-            if str.find(result, "move:") != -1:
-                move = result[5:]
-        except:
-            pass
+        book = config["standard"]
     else:
-        return None
+        if config.get("{}".format(board.uci_variant)):
+            book = config["{}".format(board.uci_variant)]
+        else:
+            return None
+
+    with chess.polyglot.open_reader(book) as reader:
+        try:
+            selection = config.get("selection", "weighted_random")
+            if selection == "weighted_random":
+                move = reader.weighted_choice(board).move()
+            elif selection == "uniform_random":
+                move = reader.choice(board, config.get("min_weight", 1)).move()
+            elif selection == "best_move":
+                move = reader.find(board, config.get("min_weight", 1)).move()
+        except IndexError:
+            # python-chess raises "IndexError" if no entries found
+            move = None
 
     if move is not None:
-        logger.info("Got move {} from book".format(move))
+        logger.info("Got move {} from book {}".format(move, book))
 
     return move
 
