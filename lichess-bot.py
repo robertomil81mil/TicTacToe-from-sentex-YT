@@ -162,7 +162,8 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
     while not terminated:
         try:
             if not polyglot_cfg.get("enabled") or not play_first_book_move(game, engine, board, li, book_cfg):
-            play_first_move(game, engine, board, li)
+                
+                play_first_move(game, engine, board, li)
             engine.set_time_control(game)
             binary_chunk = next(lines)
             upd = json.loads(binary_chunk.decode('utf-8')) if binary_chunk else None
