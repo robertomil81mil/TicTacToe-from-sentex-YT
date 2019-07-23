@@ -158,9 +158,12 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
         global ponder_results        
         best_move , ponder_move = engine.search_with_ponder(board, wtime, btime, winc, binc, True)
         ponder_results[game.id] = ( best_move , ponder_move )
-    engine.set_time_control(game)
+    
     while not terminated:
         try:
+            if not polyglot_cfg.get("enabled") or not play_first_book_move(game, engine, board, li, book_cfg):
+            play_first_move(game, engine, board, li)
+            engine.set_time_control(game)
             binary_chunk = next(lines)
             upd = json.loads(binary_chunk.decode('utf-8')) if binary_chunk else None
             u_type = upd["type"] if upd else "ping"
