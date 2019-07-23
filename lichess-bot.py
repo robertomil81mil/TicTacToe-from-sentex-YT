@@ -145,13 +145,13 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
     book_cfg = polyglot_cfg.get("book", {})
 
     ponder_thread = None
-    ponder_uci = None
+  
 
     if not polyglot_cfg.get("enabled") or not play_first_book_move(game, engine, board, li, book_cfg):
             play_first_move(game, engine, board, li)
 
-        engine.set_time_control(game)
     
+    ponder_uci = None
     def ponder_thread_func(game, engine, board, wtime, btime, winc, binc):
         global ponder_results        
         best_move , ponder_move = engine.search_with_ponder(board, wtime, btime, winc, binc, True)
