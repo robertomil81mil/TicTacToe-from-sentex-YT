@@ -129,8 +129,9 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
   
 
     if not polyglot_cfg.get("enabled") or not play_first_book_move(game, engine, board, li, book_cfg):
-            play_first_move(game, engine, board, li)
-            return True
+        
+        play_first_move(game, engine, board, li)
+           
     engine.set_time_control(game)
 
 
