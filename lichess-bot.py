@@ -179,6 +179,8 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
 
                     best_move = None
                     ponder_move = None
+                    if polyglot_cfg.get("enabled") and len(moves) <= polyglot_cfg.get("max_depth", 8) * 2 - 1:
+                        best_move = get_book_move(board, book_cfg)
                     if not ( ponder_thread is None ):
                         move_uci = moves[-1]
                         if ponder_uci == move_uci:
