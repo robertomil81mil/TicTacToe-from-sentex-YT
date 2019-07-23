@@ -152,11 +152,10 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
 
         engine.set_time_control(game)
     
-def ponder_thread_func(game, engine, board, wtime, btime, winc, binc):
+    def ponder_thread_func(game, engine, board, wtime, btime, winc, binc):
         global ponder_results        
         best_move , ponder_move = engine.search_with_ponder(board, wtime, btime, winc, binc, True)
-        ponder_results[game.id] = ( best_move , ponder_move )    
-
+        ponder_results[game.id] = ( best_move , ponder_move )
 
     while not terminated:
         try:
