@@ -200,11 +200,11 @@ def play_game(li, game_id, control_queue, engine_factory, user_profile, config, 
 
                     book_move = get_book_move(board, book_cfg)
                     if best_move == None:
-                        if book_move == None:
-                            best_move , ponder_move = engine.search_with_ponder(board, upd["wtime"], upd["btime"], upd["winc"], upd["binc"])
-                            engine.print_stats()
-                        else:
-                            best_move = book_move
+                       
+                        best_move , ponder_move = engine.search_with_ponder(board, upd["wtime"], upd["btime"], upd["winc"], upd["binc"])
+                        engine.print_stats()
+                      
+                      
                     else:
                         if not ( book_move == None ):
                             best_move = book_move
