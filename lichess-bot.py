@@ -158,7 +158,7 @@ def ponder_thread_func(game, engine, board, wtime, btime, winc, binc):
         best_move , ponder_move = engine.search_with_ponder(board, wtime, btime, winc, binc, True)
         ponder_results[game.id] = ( best_move , ponder_move )    
 
-    engine.set_time_control(game)
+
     while not terminated:
         try:
             binary_chunk = next(lines)
